@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.list.demo.account.dao.AccountDao" >
+
+  <resultMap id="BaseResultMap" type="com.list.demo.account.model.Account" >
+  		<id column="account_id" property="accountId" jdbcType="BIGINT"/>
+  		<id column="account" property="account" jdbcType="CHAR"/>
+  		<id column="nickname" property="nickname" jdbcType="VARCHAR"/>
+  		<id column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+  		<id column="sex" property="sex" jdbcType="CHAR"/>
+  		<id column="phone" property="phone" jdbcType="VARCHAR"/>
+  		<id column="email" property="email" jdbcType="VARCHAR"/>
+  		<id column="enable_flag" property="enableFlag" jdbcType="CHAR"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  		account_id,
+  		account,
+  		nickname,
+  		img_url,
+  		sex,
+  		phone,
+  		email,
+  		enable_flag
+  </sql>
+  
+  <sql id="Base_Java_List" >
+  		#{accountId,jdbcType=BIGINT},
+  		#{account,jdbcType=CHAR},
+  		#{nickname,jdbcType=VARCHAR},
+  		#{imgUrl,jdbcType=VARCHAR},
+  		#{sex,jdbcType=CHAR},
+  		#{phone,jdbcType=VARCHAR},
+  		#{email,jdbcType=VARCHAR},
+  		#{enableFlag,jdbcType=CHAR}
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where 
+  		account_id=#{accountId,jdbcType=BIGINT}
+  </select>
+  
+   <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account t
+    where 1=1
+    	<if test="accountId != null"> and t.account_id = #{accountId}</if>
+    	<if test="account != null"> and t.account = #{account}</if>
+    	<if test="nickname != null"> and t.nickname = #{nickname}</if>
+    	<if test="imgUrl != null"> and t.img_url = #{imgUrl}</if>
+    	<if test="sex != null"> and t.sex = #{sex}</if>
+    	<if test="phone != null"> and t.phone = #{phone}</if>
+    	<if test="email != null"> and t.email = #{email}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='accountId'">order by account_id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='account'">order by account
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='nickname'">order by nickname
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='imgUrl'">order by img_url
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='sex'">order by sex
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='phone'">order by phone
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='email'">order by email
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 			 
+  </select>
+  
+  
+  <delete id="delete" >
+    delete from account
+    where 
+  		account_id=#{accountId,jdbcType=BIGINT}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.list.demo.account.model.Account" >
+    insert into account 
+    ( 
+      	<include refid="Base_Column_List" />
+    )
+    values (
+    	<include refid="Base_Java_List" />
+    )
+  </insert>
+  
+  <insert id="update" parameterType="com.list.demo.account.model.Account" >
+    update account 
+    set
+  		account = #{account,jdbcType=CHAR},
+  		nickname = #{nickname,jdbcType=VARCHAR},
+  		img_url = #{imgUrl,jdbcType=VARCHAR},
+  		sex = #{sex,jdbcType=CHAR},
+  		phone = #{phone,jdbcType=VARCHAR},
+  		email = #{email,jdbcType=VARCHAR},
+  		enable_flag = #{enableFlag,jdbcType=CHAR}
+  	where
+  		account_id=#{accountId,jdbcType=BIGINT}
+  </insert>
+  
+  
+  <select id="getCount" parameterType="java.util.Map" resultType="java.lang.Long">
+  	select count(1)
+  	from account t
+  	where 1=1
+    	<if test="accountId != null"> and t.account_id = #{accountId}</if>
+    	<if test="account != null"> and t.account = #{account}</if>
+    	<if test="nickname != null"> and t.nickname = #{nickname}</if>
+    	<if test="imgUrl != null"> and t.img_url = #{imgUrl}</if>
+    	<if test="sex != null"> and t.sex = #{sex}</if>
+    	<if test="phone != null"> and t.phone = #{phone}</if>
+    	<if test="email != null"> and t.email = #{email}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  </select>
+  
+   <select id="getPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from account t
+    where 1=1
+    	<if test="accountId != null"> and t.account_id = #{accountId}</if>
+    	<if test="account != null"> and t.account = #{account}</if>
+    	<if test="nickname != null"> and t.nickname = #{nickname}</if>
+    	<if test="imgUrl != null"> and t.img_url = #{imgUrl}</if>
+    	<if test="sex != null"> and t.sex = #{sex}</if>
+    	<if test="phone != null"> and t.phone = #{phone}</if>
+    	<if test="email != null"> and t.email = #{email}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='accountId'">order by account_id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='account'">order by account
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='nickname'">order by nickname
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='imgUrl'">order by img_url
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='sex'">order by sex
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='phone'">order by phone
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='email'">order by email
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 
+	<if test="startRow != null and rowSize != null">limit #{startRow}, #{rowSize}</if>	 
+  </select>
+  
+</mapper>
