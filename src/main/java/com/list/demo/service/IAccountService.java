@@ -1,12 +1,10 @@
-package com.list.demo.account.service;
+package com.list.demo.service;
 
 
 import java.util.*;
-import java.io.Serializable;
-import org.springframework.stereotype.Service;
 
-import com.list.demo.account.model.*;
-import com.list.demo.account.dao.*;
+import com.list.demo.model.Account;
+import org.springframework.stereotype.Service;
 
 /**
  * 服务接口

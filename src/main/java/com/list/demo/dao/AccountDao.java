@@ -1,12 +1,12 @@
-package com.list.demo.account.dao;
+package com.list.demo.dao;
 
 
 import java.util.*;
-import java.io.Serializable;
+
+import com.list.demo.model.Account;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.list.demo.account.model.*;
 
 /**
  * 数据访问接口

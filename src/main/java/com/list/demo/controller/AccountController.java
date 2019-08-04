@@ -1,7 +1,9 @@
-package com.list.demo.account.controller;
+package com.list.demo.controller;
 
 import java.util.*;
 
+import com.list.demo.model.Account;
+import com.list.demo.service.IAccountService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
-import com.list.demo.account.model.*;
-import com.list.demo.account.service.*;
 
 import com.list.shaddock.common.vo.PageRows;
 import com.list.shaddock.common.vo.ResultData;

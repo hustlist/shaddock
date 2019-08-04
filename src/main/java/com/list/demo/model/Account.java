@@ -1,4 +1,4 @@
-package com.list.demo.account.model;
+package com.list.demo.model;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

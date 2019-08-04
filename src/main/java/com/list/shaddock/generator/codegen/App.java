@@ -1,5 +1,6 @@
 package com.list.shaddock.generator.codegen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.list.shaddock.generator.code.annotation.parser.BoField;
@@ -24,20 +25,21 @@ public class App {
 	public static void run() {
 		// 配置MySQL数据库连接
 		DBConfig config = new DBConfig();
-		config.setDriverClass("com.mysql.jdbc.Driver");
-		config.setConnectionUrl("jdbc:mysql://192.168.1.182/uac?useUnicode=true&amp;characterEncoding=UTF-8");
-		config.setUserId("root");
-		config.setPassword("root");
+		config.setDriverClass("com.mysql.cj.jdbc.Driver");
+		config.setConnectionUrl("jdbc:mysql://192.168.1.184/uat?useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true");
+		config.setUserId("uat");
+		config.setPassword("Uat@123456");
 
 		// 设置代码生成绝对路径和包路径
 		// 注意生成源代码的路径，要添加到本项目工程的代码构建路径中
-		String srcPath = "F:/workspace/javaspace/springboot/list-shaddock/src/main/java";
+		String srcPath = "D:\\workspace\\ideajavaspace\\list\\demo\\src\\main\\java";
 		String javaPackage = "com.list.demo";
 
 		DbUtil dbUtil = new DbUtil(config);
 
-		// List<String> tables = new ArrayList<String>();
-		List<String> tables = dbUtil.getTables();
+		 List<String> tables = new ArrayList<String>();
+		tables.add("direct_intent_info");
+//		List<String> tables = dbUtil.getTables();
 
 		for (String table : tables) {
 			// 设置实际表名

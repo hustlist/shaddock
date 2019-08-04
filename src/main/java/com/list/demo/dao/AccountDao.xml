@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.list.demo.account.dao.AccountDao" >
+<mapper namespace="com.list.demo.dao.AccountDao" >
 
-  <resultMap id="BaseResultMap" type="com.list.demo.account.model.Account" >
+  <resultMap id="BaseResultMap" type="com.list.demo.model.Account" >
   		<id column="account_id" property="accountId" jdbcType="BIGINT"/>
   		<id column="account" property="account" jdbcType="CHAR"/>
   		<id column="nickname" property="nickname" jdbcType="VARCHAR"/>
@@ -96,7 +96,7 @@
   </delete>
   
   
-  <insert id="insert" parameterType="com.list.demo.account.model.Account" >
+  <insert id="insert" parameterType="com.list.demo.model.Account" >
     insert into account 
     ( 
       	<include refid="Base_Column_List" />
@@ -106,7 +106,7 @@
     )
   </insert>
   
-  <insert id="update" parameterType="com.list.demo.account.model.Account" >
+  <insert id="update" parameterType="com.list.demo.model.Account" >
     update account 
     set
   		account = #{account,jdbcType=CHAR},

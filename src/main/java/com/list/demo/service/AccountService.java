@@ -1,17 +1,16 @@
-package com.list.demo.account.service;
+package com.list.demo.service;
 
 
 import java.util.*;
-import javax.annotation.Resource;
 
+import com.list.demo.dao.AccountDao;
+import com.list.demo.model.Account;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.list.demo.account.model.*;
-import com.list.demo.account.dao.*;
 
 /**
  * 服务接口
