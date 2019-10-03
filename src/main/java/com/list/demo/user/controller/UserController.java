@@ -1,12 +1,11 @@
-package com.list.demo.controller;
+package com.list.demo.user.controller;
 
 import java.util.*;
 
-import com.list.demo.model.Account;
-import com.list.demo.service.IAccountService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
+import com.list.demo.user.model.*;
+import com.list.demo.user.service.*;
 
 import com.list.shaddock.common.vo.PageRows;
 import com.list.shaddock.common.vo.ResultData;
@@ -35,17 +39,17 @@ import com.list.shaddock.common.exception.ValidationException;
 /*
  * spring mvc控制类
  */
-@Api("Account相关api")
+@Api("User相关api")
 @RestController
-@RequestMapping(value = "/demo/account")
-public class AccountController {
+@RequestMapping(value = "/demo/user")
+public class UserController {
 
 	//日志对象
-	private static final Logger log = LogManager.getLogger(AccountController.class);
+	private static final Logger log = LogManager.getLogger(UserController.class);
 	
 	//本身服务对象
 	@Autowired
-	private IAccountService accountService = null;
+	private IUserService userService = null;
 	
 	//多语言对象
 	@Autowired
@@ -53,38 +57,38 @@ public class AccountController {
 	
 	@ApiOperation("根据逐渐获取实体对象-get方式")
 	@ApiImplicitParams({
-		@ApiImplicitParam(paramType = "path", name = "accountId", dataType = "Long",required=true,value="主键",defaultValue="")
+		@ApiImplicitParam(paramType = "path", name = "id", dataType = "Integer",required=true,value="",defaultValue="")
 	})	
 	@ApiResponses({ 
 		@ApiResponse(code = 400, message = "请求参数没填好"), 
 		@ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
 		 })
-	@GetMapping(value = "/{accountId}")
+	@GetMapping(value = "/{id}")
 	@ResponseBody
-	public ResultData<Account> get(@PathVariable("accountId") Long accountId ) throws Exception {
+	public ResultData<User> get(@PathVariable("id") Integer id ) throws Exception {
 		//返回统一的服务端数据对象
-		ResultData<Account> resultData = new ResultData<Account>();
+		ResultData<User> resultData = new ResultData<User>();
 		
-		Account account = accountService.get(accountId);
-		resultData.setData(account);
+		User user = userService.get(id);
+		resultData.setData(user);
 		return resultData;
 	}
 	
 	@ApiOperation("根据主键删除指定记录-delete方式")
 	@ApiImplicitParams({
-		@ApiImplicitParam(paramType = "path", name = "accountId", dataType = "Long",required=true,value="主键",defaultValue="")
+		@ApiImplicitParam(paramType = "path", name = "id", dataType = "Integer",required=true,value="",defaultValue="")
 	})	
 	@ApiResponses({ 
 		@ApiResponse(code = 400, message = "请求参数没填好"), 
 		@ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
 		 })
-	@DeleteMapping(value = "/{accountId}")
+	@DeleteMapping(value = "/{id}")
 	@ResponseBody
-	public ResultData<Integer> delete(@PathVariable("accountId") Long accountId ) throws Exception {
+	public ResultData<Integer> delete(@PathVariable("id") Integer id ) throws Exception {
 		//返回统一的服务端数据对象
 		ResultData<Integer> resultData = new ResultData<Integer>();
 
-		int count = accountService.delete(accountId);	
+		int count = userService.delete(id);	
 		
 		resultData.setData(new Integer(count));
 		
@@ -100,7 +104,7 @@ public class AccountController {
 		 })
 	@PostMapping(value = "/add",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public ResultData<Integer> add(@Validated @RequestBody Account account,BindingResult result) throws Exception {
+	public ResultData<Integer> add(@Validated @RequestBody User user,BindingResult result) throws Exception {
 		//检查校验结果
 		if(result != null && result.hasErrors()){
 			throw new ValidationException(result);
@@ -109,7 +113,7 @@ public class AccountController {
 		//返回统一的服务端数据对象
 		ResultData<Integer> resultData = new ResultData<Integer>();
 
-		int count = accountService.insert(account);	
+		int count = userService.insert(user);	
 		
 		resultData.setData(new Integer(count));
 		
@@ -125,7 +129,7 @@ public class AccountController {
 		 })
 	@PutMapping(value = "/edit",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public ResultData<Integer> edit(@Validated @RequestBody Account account,BindingResult result) throws Exception {
+	public ResultData<Integer> edit(@Validated @RequestBody User user,BindingResult result) throws Exception {
 		//检查校验结果
 		if(result != null && result.hasErrors()){
 			throw new ValidationException(result);
@@ -134,7 +138,7 @@ public class AccountController {
 		//返回统一的服务端数据对象
 		ResultData<Integer> resultData = new ResultData<Integer>();
 
-		int count = accountService.update(account);	
+		int count = userService.update(user);	
 		
 		resultData.setData(new Integer(count));
 		
@@ -150,16 +154,16 @@ public class AccountController {
 		 })
 	@PostMapping(value = "/getlist")
 	@ResponseBody
-	public ResultData<List<Account>> getList(@RequestBody FormData<Account> form) throws Exception {
+	public ResultData<List<User>> getList(@RequestBody FormData<User> form) throws Exception {
 		//返回统一的服务端数据对象
-		ResultData<List<Account>> resultData = new ResultData<List<Account>>();
+		ResultData<List<User>> resultData = new ResultData<List<User>>();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		//设置查询条件
-		map.put("accountId",form.getBo().getAccountId());
+		map.put("id",form.getBo().getId());
 		
-		List<Account> list = accountService.getList(map,form.getSort(),form.getOrder());
+		List<User> list = userService.getList(map,form.getSort(),form.getOrder());
 		
 		resultData.setData(list);
 		
@@ -175,21 +179,21 @@ public class AccountController {
 		 })
 	@PostMapping(value = "/getpage")
 	@ResponseBody
-	public ResultData<PageRows<Account>> getPage(@RequestBody FormData<Account> form) throws Exception {
+	public ResultData<PageRows<User>> getPage(@RequestBody FormData<User> form) throws Exception {
 		
 		//返回统一的服务端数据对象
-		ResultData<PageRows<Account>> resultData = new ResultData<PageRows<Account>>();
+		ResultData<PageRows<User>> resultData = new ResultData<PageRows<User>>();
 
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		//设置查询条件
-		map.put("accountId",form.getBo().getAccountId());
+		map.put("id",form.getBo().getId());
 
-		long total = accountService.getCount(map,form.getSort(),form.getOrder());
+		long total = userService.getCount(map,form.getSort(),form.getOrder());
 		
-		List<Account> list = accountService.getPage(map,form.getSort(),form.getOrder(),form.getPage(),form.getRows());
+		List<User> list = userService.getPage(map,form.getSort(),form.getOrder(),form.getPage(),form.getRows());
 
-		PageRows<Account> page = new PageRows<Account>();
+		PageRows<User> page = new PageRows<User>();
 		
 		page.setCurrent(form.getPage());
 		page.setTotal(total);

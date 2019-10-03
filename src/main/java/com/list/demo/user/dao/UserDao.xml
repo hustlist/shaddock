@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.list.demo.user.dao.UserDao" >
+
+  <resultMap id="BaseResultMap" type="com.list.demo.user.model.User" >
+  		<id column="id" property="id" jdbcType="INTEGER"/>
+  		<id column="name" property="name" jdbcType="VARCHAR"/>
+  		<id column="age" property="age" jdbcType="INTEGER"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  		id,
+  		name,
+  		age
+  </sql>
+  
+  <sql id="Base_Java_List" >
+  		#{id,jdbcType=INTEGER},
+  		#{name,jdbcType=VARCHAR},
+  		#{age,jdbcType=INTEGER}
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user t
+    where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="name != null"> and t.name = #{name}</if>
+    	<if test="age != null"> and t.age = #{age}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='name'">order by name
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='age'">order by age
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 			 
+  </select>
+  
+  
+  <delete id="delete" >
+    delete from user
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.list.demo.user.model.User" >
+    insert into user 
+    ( 
+      	<include refid="Base_Column_List" />
+    )
+    values (
+    	<include refid="Base_Java_List" />
+    )
+  </insert>
+  
+  <insert id="update" parameterType="com.list.demo.user.model.User" >
+    update user 
+    set
+  		name = #{name,jdbcType=VARCHAR},
+  		age = #{age,jdbcType=INTEGER}
+  	where
+  		id=#{id,jdbcType=INTEGER}
+  </insert>
+  
+  
+  <select id="getCount" parameterType="java.util.Map" resultType="java.lang.Long">
+  	select count(1)
+  	from user t
+  	where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="name != null"> and t.name = #{name}</if>
+    	<if test="age != null"> and t.age = #{age}</if>
+  </select>
+  
+   <select id="getPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from user t
+    where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="name != null"> and t.name = #{name}</if>
+    	<if test="age != null"> and t.age = #{age}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='name'">order by name
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='age'">order by age
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 
+	<if test="startRow != null and rowSize != null">limit #{startRow}, #{rowSize}</if>	 
+  </select>
+  
+</mapper>

@@ -1,50 +1,51 @@
-package com.list.demo.service;
+package com.list.demo.user.service;
 
 
 import java.util.*;
 
-import com.list.demo.dao.AccountDao;
-import com.list.demo.model.Account;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.list.demo.user.model.*;
+import com.list.demo.user.dao.*;
 
 /**
  * 服务接口
  */
 @Service
-public class AccountService implements IAccountService{
+public class UserService implements IUserService{
 
 	@Autowired
-	private AccountDao accountDao = null;
-	
-	public void setAccountDao(AccountDao accountDao)
+	private UserDao userDao = null;
+
+
+	public void setUserDao(UserDao userDao)
 	{
-		this.accountDao = accountDao;
+		this.userDao = userDao;
 	}
 
 	/**
 	 * 根据主键获取实体对象
 	 */
-	public Account get(Long accountId) throws Exception
+	public User get(Integer id) throws Exception
 	{
-		return accountDao.get(accountId);
+		return userDao.get(id);
 	}
 	
 	/**
 	 * 获取符合条件的实体列表，按指定属性排序
 	 */
-	public List<Account> getList(Map<String,Object> map,String orderField, String order) throws Exception
+	public List<User> getList(Map<String,Object> map,String orderField, String order) throws Exception
 	{
-		List<Account> list = null;
+		List<User> list = null;
 		
 		map.put("orderField",orderField);
 		map.put("order",order);
 		
-		list = accountDao.getList(map);
+		list = userDao.getList(map);
 		
 		return list;
 	}
@@ -53,27 +54,27 @@ public class AccountService implements IAccountService{
 	 * 删除指定记录
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, isolation=Isolation.READ_UNCOMMITTED)
-	public int delete(Long accountId) throws Exception
+	public int delete(Integer id) throws Exception
 	{
-		return accountDao.delete(accountId);
+		return userDao.delete(id);
 	}
 
 	/**
 	 * 新增指定记录
 	 */	
 	@Transactional(propagation = Propagation.SUPPORTS, isolation=Isolation.READ_UNCOMMITTED)
-    public int insert(Account account) throws Exception
+    public int insert(User user) throws Exception
     {
-    	return accountDao.insert(account);
+    	return userDao.insert(user);
     }
 
 	/**
 	 * 修改指定记录
 	 */	
 	@Transactional(propagation = Propagation.SUPPORTS, isolation=Isolation.READ_UNCOMMITTED)
-    public int update(Account account) throws Exception
+    public int update(User user) throws Exception
     {
-    	return accountDao.update(account);
+    	return userDao.update(user);
     }
     
     /**
@@ -81,20 +82,20 @@ public class AccountService implements IAccountService{
 	 */	
     public long getCount(Map<String,Object> map,String orderField,String order)  throws Exception
     {
-    	return accountDao.getCount(map);
+    	return userDao.getCount(map);
     }
 
 
-    public List<Account> getPage(Map<String,Object> map,String orderField,String order,Long page,Long rows) throws Exception
+    public List<User> getPage(Map<String,Object> map,String orderField,String order,Long page,Long rows) throws Exception
     {
-    	List<Account> list = null;
+    	List<User> list = null;
 		
 		map.put("orderField",orderField);
 		map.put("order",order);
 		map.put("startRow",(page-1)*rows);
 		map.put("rowSize",rows);
 		
-		list = accountDao.getPage(map);
+		list = userDao.getPage(map);
 		
 		return list;
     }

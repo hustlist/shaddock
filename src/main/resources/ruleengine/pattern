@@ -1,0 +1,5 @@
+[@INSRB_NLU_INSURANCE_INQUIRY]
+[D:user_insurance][D:kw_inquiry_verb][W:0-3]
+[D:user_insurance][D:kw_is_what][W:0-3]
+[D:kw_inquiry][D:user_insurance_name][W:0-3]
+[D:kw_inquiry][D:user_insurance_name][D:kw_inquiry_verb][W:0-2]

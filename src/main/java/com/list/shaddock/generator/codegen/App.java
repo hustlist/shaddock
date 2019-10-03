@@ -26,19 +26,19 @@ public class App {
 		// 配置MySQL数据库连接
 		DBConfig config = new DBConfig();
 		config.setDriverClass("com.mysql.cj.jdbc.Driver");
-		config.setConnectionUrl("jdbc:mysql://192.168.1.184/uat?useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true");
-		config.setUserId("uat");
-		config.setPassword("Uat@123456");
+		config.setConnectionUrl("jdbc:mysql://localhost:3306/uac?useUnicode=true&characterEncoding=UTF-8&nullCatalogMeansCurrent=true");
+		config.setUserId("uac");
+		config.setPassword("Uac@123456");
 
 		// 设置代码生成绝对路径和包路径
 		// 注意生成源代码的路径，要添加到本项目工程的代码构建路径中
-		String srcPath = "D:\\workspace\\ideajavaspace\\list\\demo\\src\\main\\java";
+		String srcPath = "/Users/apple/Documents/GitHub/shaddock/src/main/java";
 		String javaPackage = "com.list.demo";
 
 		DbUtil dbUtil = new DbUtil(config);
 
 		 List<String> tables = new ArrayList<String>();
-		tables.add("direct_intent_info");
+		tables.add("user");
 //		List<String> tables = dbUtil.getTables();
 
 		for (String table : tables) {
