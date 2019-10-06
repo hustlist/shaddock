@@ -1,9 +1,9 @@
 package com.list.shaddock.common.exception;
 
+import org.springframework.validation.BindingResult;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.validation.BindingResult;
 
 public class ValidationException extends Exception {
 	

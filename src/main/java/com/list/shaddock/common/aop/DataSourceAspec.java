@@ -1,7 +1,7 @@
 package com.list.shaddock.common.aop;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.list.shaddock.common.consts.SysGlobalConst;
+import com.list.shaddock.common.datasource.DatabaseContextHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.list.shaddock.common.consts.SysGlobalConst;
-import com.list.shaddock.common.datasource.DatabaseContextHolder;
+import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component

@@ -1,15 +1,11 @@
 package com.list.shaddock.generator.code.freemarker;
 
+import freemarker.core.Environment;
+import freemarker.template.*;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
-
-import freemarker.core.Environment;
-import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
 
 public class LowerAllCharacter implements TemplateDirectiveModel {
 

@@ -1,15 +1,15 @@
 package com.list.shaddock.generator.code.annotation.parser;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-
 import com.list.shaddock.generator.code.annotation.DbField;
 import com.list.shaddock.generator.code.annotation.DbTable;
 import com.list.shaddock.generator.code.annotation.FieldBusi;
 import com.list.shaddock.generator.code.annotation.ModelBusi;
 import com.list.shaddock.generator.code.util.StringUtil;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 public class Parser {
 

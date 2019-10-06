@@ -1,25 +1,16 @@
 package com.list.shaddock.generator.code.db;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import com.list.shaddock.generator.code.freemarker.DealSpecialCharacter;
 import com.list.shaddock.generator.code.freemarker.LowerFirstCharacter;
 import com.list.shaddock.generator.code.freemarker.UpperFirstCharacter;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.sql.*;
+import java.util.*;
 
 public class DbUtil {
 

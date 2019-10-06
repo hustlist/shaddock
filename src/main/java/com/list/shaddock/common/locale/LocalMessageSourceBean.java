@@ -1,10 +1,8 @@
 package com.list.shaddock.common.locale;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.alibaba.druid.util.StringUtils;
+import com.list.shaddock.common.consts.SysGlobalConst;
+import com.list.shaddock.config.MsgLanguageConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,9 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.LocaleResolver;
 
-import com.alibaba.druid.util.StringUtils;
-import com.list.shaddock.common.consts.SysGlobalConst;
-import com.list.shaddock.config.MsgLanguageConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 
 @Component("localeResolver")
 public class LocalMessageSourceBean implements LocaleResolver {

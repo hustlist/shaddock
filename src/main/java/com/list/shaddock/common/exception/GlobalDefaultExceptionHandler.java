@@ -1,12 +1,11 @@
 package com.list.shaddock.common.exception;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.list.shaddock.common.vo.ResultData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.list.shaddock.common.vo.ResultData;
+import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {

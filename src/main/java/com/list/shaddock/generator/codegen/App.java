@@ -1,14 +1,14 @@
 package com.list.shaddock.generator.codegen;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.list.shaddock.generator.code.annotation.parser.BoField;
 import com.list.shaddock.generator.code.annotation.parser.BoInfo;
 import com.list.shaddock.generator.code.db.DBConfig;
 import com.list.shaddock.generator.code.db.DbColumn;
 import com.list.shaddock.generator.code.db.DbUtil;
 import com.list.shaddock.generator.code.freemarker.CodeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 

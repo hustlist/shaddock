@@ -12,11 +12,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 public class CodeUtil {
-	
+
 	private BoInfo boInfo;
-	
-	
-	
+
+
+
 	public BoInfo getBoInfo() {
 		return boInfo;
 	}
@@ -42,28 +42,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("javabean.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/model/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getBoName() + ".java"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
@@ -84,28 +84,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("javadaointerface.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/dao/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getDaoInfName() + ".java"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
@@ -126,35 +126,35 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("oraclemybatismapper.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/model/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getDaoInfName() + ".xml"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public void createMysqlMapper() {
 		Configuration cfg = new Configuration();
 		try {
@@ -168,28 +168,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("mysqlmybatismapper.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/dao/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getDaoInfName() + ".xml"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
@@ -210,28 +210,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("javaserviceinterface.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/service/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getServiceInfName() + ".java"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
@@ -252,28 +252,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("javaservice.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/service/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getServiceName() + ".java"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {
@@ -294,28 +294,28 @@ public class CodeUtil {
 			cfg.setSharedVariable("lowerAC", new LowerAllCharacter());
 			//制定模板
 			Template template = cfg.getTemplate("javacontroller.ftl");
-			
+
 			//输出文件路径=dbConfig.getOutFilePath + 包路径
 			String filePath = boInfo.getRootSrcPath();
 			filePath += ((filePath.endsWith("/")||filePath.endsWith("\\"))?"":"/");
 			filePath += boInfo.getPackageName().replace('.', '/');
 			filePath += "/controller/";
-			
+
 			//判断文件是否存在，不存在，创建文件路径
 			File tempFile = new File(filePath);
 			if(!tempFile.exists()) {
 				tempFile.mkdirs();
 			}
-			
+
 			FileOutputStream fos = new FileOutputStream(new File(filePath + boInfo.getControllerName() + ".java"));
-			
+
 			//模拟数据源
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("boInfo", boInfo);
-			
+
 			//根据模板生成代码
 			template.process(map, new OutputStreamWriter(fos,"utf-8"));
-			
+
 			fos.flush();
 			fos.close();
 		}catch(Exception ex) {

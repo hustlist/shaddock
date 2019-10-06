@@ -34,9 +34,9 @@ public class BoInfo {
 	//表名
 	private String tableName;
 	
-	private List<BoField> pks = new ArrayList<BoField>(100);
+	private List<BoField> pks = new ArrayList<>(100);
 	
-	private List<BoField> fields = new ArrayList<BoField>(100);
+	private List<BoField> fields = new ArrayList<>(100);
 	
 	public List<BoField> getPks() {
 		return pks;

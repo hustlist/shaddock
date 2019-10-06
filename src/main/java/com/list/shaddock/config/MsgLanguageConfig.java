@@ -1,10 +1,10 @@
 package com.list.shaddock.config;
 
-import java.util.Map;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
+import java.util.Map;
 
 @Configuration
 @ConfigurationProperties(prefix="msg")
@@ -20,7 +20,5 @@ public class MsgLanguageConfig {
 	public void setLanMap(Map<String, String> lanMap) {
 		this.lanMap = lanMap;
 	}
-	
-	
-	
+
 }

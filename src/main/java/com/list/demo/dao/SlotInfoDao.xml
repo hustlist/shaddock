@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.list.demo.dao.SlotInfoDao" >
+
+  <resultMap id="BaseResultMap" type="com.list.demo.entity.model.SlotInfo" >
+  		<id column="id" property="id" jdbcType="INTEGER"/>
+  		<id column="slot_code" property="slotCode" jdbcType="VARCHAR"/>
+  		<id column="slot_name" property="slotName" jdbcType="VARCHAR"/>
+  		<id column="slot_type" property="slotType" jdbcType="VARCHAR"/>
+  		<id column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  		id,
+  		slot_code,
+  		slot_name,
+  		slot_type,
+  		enable_flag
+  </sql>
+  
+  <sql id="Base_Java_List" >
+  		#{id,jdbcType=INTEGER},
+  		#{slotCode,jdbcType=VARCHAR},
+  		#{slotName,jdbcType=VARCHAR},
+  		#{slotType,jdbcType=VARCHAR},
+  		#{enableFlag,jdbcType=VARCHAR}
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from slot_info
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from slot_info t
+    where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="slotCode != null"> and t.slot_code = #{slotCode}</if>
+    	<if test="slotName != null"> and t.slot_name = #{slotName}</if>
+    	<if test="slotType != null"> and t.slot_type = #{slotType}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotCode'">order by slot_code
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotName'">order by slot_name
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotType'">order by slot_type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 			 
+  </select>
+  
+  
+  <delete id="delete" >
+    delete from slot_info
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.list.demo.entity.model.SlotInfo" >
+    insert into slot_info 
+    ( 
+      	<include refid="Base_Column_List" />
+    )
+    values (
+    	<include refid="Base_Java_List" />
+    )
+  </insert>
+  
+  <insert id="update" parameterType="com.list.demo.entity.model.SlotInfo" >
+    update slot_info 
+    set
+  		slot_code = #{slotCode,jdbcType=VARCHAR},
+  		slot_name = #{slotName,jdbcType=VARCHAR},
+  		slot_type = #{slotType,jdbcType=VARCHAR},
+  		enable_flag = #{enableFlag,jdbcType=VARCHAR}
+  	where
+  		id=#{id,jdbcType=INTEGER}
+  </insert>
+  
+  
+  <select id="getCount" parameterType="java.util.Map" resultType="java.lang.Long">
+  	select count(1)
+  	from slot_info t
+  	where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="slotCode != null"> and t.slot_code = #{slotCode}</if>
+    	<if test="slotName != null"> and t.slot_name = #{slotName}</if>
+    	<if test="slotType != null"> and t.slot_type = #{slotType}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  </select>
+  
+   <select id="getPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from slot_info t
+    where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="slotCode != null"> and t.slot_code = #{slotCode}</if>
+    	<if test="slotName != null"> and t.slot_name = #{slotName}</if>
+    	<if test="slotType != null"> and t.slot_type = #{slotType}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotCode'">order by slot_code
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotName'">order by slot_name
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='slotType'">order by slot_type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 
+	<if test="startRow != null and rowSize != null">limit #{startRow}, #{rowSize}</if>	 
+  </select>
+  
+</mapper>

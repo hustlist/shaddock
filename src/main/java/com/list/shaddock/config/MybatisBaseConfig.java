@@ -1,11 +1,9 @@
 package com.list.shaddock.config;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.list.shaddock.common.datasource.DatabaseContextHolder;
+import com.list.shaddock.common.datasource.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -21,10 +19,10 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.list.shaddock.common.datasource.DatabaseContextHolder;
-import com.list.shaddock.common.datasource.DynamicDataSource;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:datasource.properties")
@@ -84,22 +82,6 @@ public class MybatisBaseConfig  implements EnvironmentAware  {
 		dataSource.setDefaultTargetDataSource(firstDataSource);
 		return dataSource;
 	}
-	
-//	@Bean(name="sqlSessionFaction")
-//	public SqlSessionFactory sqlSessionFactoryBean(DynamicDataSource ds) {
-//		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-//		bean.setDataSource(ds);
-//		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-//		try {
-//			bean.setTypeAliasesPackage("com.list.**.model");
-////			bean.setConfigLocation(resolver.getResource("classpath:mybatis-setting.xml"));
-//			bean.setMapperLocations(resolver.getResources("classpath:com/list/**/*.xml"));
-//			return bean.getObject();
-//		}catch(Exception ex) {
-//			ex.printStackTrace();
-//			throw new RuntimeException(ex);
-//		}
-//	}
 	
 	
 	@Bean

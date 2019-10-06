@@ -1,9 +1,9 @@
 package com.list.shaddock.generator.codegen;
 
-import java.util.List;
-
 import com.list.shaddock.generator.code.db.DBConfig;
 import com.list.shaddock.generator.code.db.DbUtil;
+
+import java.util.List;
 
 public class Step1 {
 

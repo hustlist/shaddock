@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.list.demo.dao.DirectIntentInfoDao" >
+
+  <resultMap id="BaseResultMap" type="com.list.demo.entity.model.DirectIntentInfo" >
+  		<id column="id" property="id" jdbcType="INTEGER"/>
+  		<id column="type" property="type" jdbcType="VARCHAR"/>
+  		<id column="source" property="source" jdbcType="VARCHAR"/>
+  		<id column="business_type" property="businessType" jdbcType="VARCHAR"/>
+  		<id column="business_data" property="businessData" jdbcType="VARCHAR"/>
+  		<id column="intent" property="intent" jdbcType="VARCHAR"/>
+  		<id column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  		id,
+  		type,
+  		source,
+  		business_type,
+  		business_data,
+  		intent,
+  		enable_flag
+  </sql>
+  
+  <sql id="Base_Java_List" >
+  		#{id,jdbcType=INTEGER},
+  		#{type,jdbcType=VARCHAR},
+  		#{source,jdbcType=VARCHAR},
+  		#{businessType,jdbcType=VARCHAR},
+  		#{businessData,jdbcType=VARCHAR},
+  		#{intent,jdbcType=VARCHAR},
+  		#{enableFlag,jdbcType=VARCHAR}
+  </sql>
+  
+  <select id="get" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from direct_intent_info
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from direct_intent_info t
+    where 1=1
+    	<if test="id != null and id != ''" > and t.id = #{id}</if>
+    	<if test="type != null and type != ''"> and t.type = #{type}</if>
+    	<if test="source != null and source != ''"> and t.source = #{source}</if>
+    	<if test="businessType != null and businessType != ''"> and t.business_type = #{businessType}</if>
+    	<if test="businessData != null and businessData != ''"> and t.business_data = #{businessData}</if>
+    	<if test="intent != null and intent != ''"> and t.intent = #{intent}</if>
+    	<if test="enableFlag != null and enableFlag != ''"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='type'">order by type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='source'">order by source
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='businessType'">order by business_type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='businessData'">order by business_data
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='intent'">order by intent
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 			 
+  </select>
+  
+  
+  <delete id="delete" >
+    delete from direct_intent_info
+    where 
+  		id=#{id,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.list.demo.entity.model.DirectIntentInfo" >
+    insert into direct_intent_info 
+    ( 
+      	<include refid="Base_Column_List" />
+    )
+    values (
+    	<include refid="Base_Java_List" />
+    )
+  </insert>
+  
+  <insert id="update" parameterType="com.list.demo.entity.model.DirectIntentInfo" >
+    update direct_intent_info 
+    set
+  		type = #{type,jdbcType=VARCHAR},
+  		source = #{source,jdbcType=VARCHAR},
+  		business_type = #{businessType,jdbcType=VARCHAR},
+  		business_data = #{businessData,jdbcType=VARCHAR},
+  		intent = #{intent,jdbcType=VARCHAR},
+  		enable_flag = #{enableFlag,jdbcType=VARCHAR}
+  	where
+  		id=#{id,jdbcType=INTEGER}
+  </insert>
+  
+  
+  <select id="getCount" parameterType="java.util.Map" resultType="java.lang.Long">
+  	select count(1)
+  	from direct_intent_info t
+  	where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="type != null"> and t.type = #{type}</if>
+    	<if test="source != null"> and t.source = #{source}</if>
+    	<if test="businessType != null"> and t.business_type = #{businessType}</if>
+    	<if test="businessData != null"> and t.business_data = #{businessData}</if>
+    	<if test="intent != null"> and t.intent = #{intent}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  </select>
+  
+   <select id="getPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from direct_intent_info t
+    where 1=1
+    	<if test="id != null"> and t.id = #{id}</if>
+    	<if test="type != null"> and t.type = #{type}</if>
+    	<if test="source != null"> and t.source = #{source}</if>
+    	<if test="businessType != null"> and t.business_type = #{businessType}</if>
+    	<if test="businessData != null"> and t.business_data = #{businessData}</if>
+    	<if test="intent != null"> and t.intent = #{intent}</if>
+    	<if test="enableFlag != null"> and t.enable_flag = #{enableFlag}</if>
+  	
+  	<if test="orderField != null">
+  		<choose>
+ 			<when test="orderField=='id'">order by id
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='type'">order by type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='source'">order by source
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='businessType'">order by business_type
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='businessData'">order by business_data
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='intent'">order by intent
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+ 			<when test="orderField=='enableFlag'">order by enable_flag
+ 				<if test="order != null and order == 'desc'">desc</if>
+ 			</when>
+		</choose>
+	</if> 
+	<if test="startRow != null and rowSize != null">limit #{startRow}, #{rowSize}</if>	 
+  </select>
+  
+</mapper>

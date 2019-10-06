@@ -126,6 +126,10 @@ public class PackageUtil {
 		File file = new File(iso_path);
 		File[] childFiles = file.listFiles();
 
+		if(null == childFiles){
+			return myClassName;
+		}
+
 		for (File childFile : childFiles) {
 			if (childFile.isDirectory()) {
 				if (childPackage) {

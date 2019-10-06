@@ -1,12 +1,12 @@
 package com.list.shaddock.generator.codegen;
 
-import java.util.List;
-
 import com.list.shaddock.generator.code.annotation.parser.BoField;
 import com.list.shaddock.generator.code.annotation.parser.BoInfo;
 import com.list.shaddock.generator.code.annotation.parser.Parser;
 import com.list.shaddock.generator.code.freemarker.CodeUtil;
 import com.list.shaddock.generator.code.java.PackageUtil;
+
+import java.util.List;
 
 public class Step2 {
 
