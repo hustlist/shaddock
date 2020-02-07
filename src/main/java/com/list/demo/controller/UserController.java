@@ -11,12 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Api("spring2.1.3样例")
+@Api("spring2.1.4样例")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -33,6 +30,15 @@ public class UserController {
         ResultData<UserInfoResp> resultData = new ResultData<>();
         long startTime = System.currentTimeMillis();
         resultData.setData(userInfoService.getUserInfo(userInfoReq));
+        logger.info("==================>耗时：" + (System.currentTimeMillis() - startTime));
+        return resultData;
+    }
+
+    @GetMapping("/{msg}")
+    public ResultData<String> sendKafkaMsgDemo(@PathVariable("msg") String msg){
+        ResultData<String> resultData = new ResultData<>();
+        long startTime = System.currentTimeMillis();
+        resultData.setData(userInfoService.sendKafkaMsgDemo(msg));
         logger.info("==================>耗时：" + (System.currentTimeMillis() - startTime));
         return resultData;
     }

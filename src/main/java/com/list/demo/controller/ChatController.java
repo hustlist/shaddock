@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/robot")
 public class ChatController {
 
-    //日志对象
-    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+    private final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
     @Autowired
     ChatService chatService;
